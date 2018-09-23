@@ -1,0 +1,106 @@
+---
+title: "RWeka"
+output: pdf_document
+---
+
+```{r}
+
+#install.packages("RWeka")
+require("RWeka")
+## Use some example data.
+w <- read.arff(system.file("arff","weather.nominal.arff",package = "RWeka"))
+w
+## Identify a decision tree.
+m <- J48(play~., data = w)
+m
+## Use 10 fold cross-validation.
+e <- evaluate_Weka_classifier(m,
+cost = matrix(c(0,2,1,0), ncol = 2),
+numFolds = 10, complexity = TRUE,
+seed = 123, class = TRUE)
+e
+summary(e)
+e$details
+
+##
+#M5P(formula, data, subset, na.action,
+  #  control = Weka_control(), options = NULL)
+##
+#M5P(difference ~ age + CS1 + R1 + WEL1 + INSLT1 + CS2 + R2 + WEL2 + INSLT2, data= booleans)
+   ## control = Weka_control(), options = NULL)
+
+
+
+#data_9att_tx13 <- read.csv(file.choose(), header = FALSE)
+data_17att_tx37<- read.csv(file="C:/Users/Owner/Desktop/17.csv", header=FALSE)
+
+booleans <- subset(data_17att_tx37, (data_17att_tx37[,1]==0 & data_17att_tx37[,10]==1) | 
+                  (data_17att_tx37[,1]==0 & data_17att_tx37[,5]==1) | 
+                  (data_17att_tx37[,7]==1 & data_17att_tx37[,10]==1))
+
+age <- booleans[,17]
+CS1 <- booleans[,18]
+R1 <- booleans[,19]
+WEL1 <- booleans[,20]
+INSLT1 <- booleans[,21]
+CS2 <- booleans[,22]
+R2 <- booleans[,23]
+WEL2 <- booleans[,24]
+INSLT2 <- booleans[,25]
+CS3 <- booleans[,26]
+R3 <- booleans[,27]
+WEL3 <- booleans[,28]
+INSLT3 <- booleans[,29]
+CS4 <- booleans[,30]
+R4 <- booleans[,31]
+WEL4 <- booleans[,32]
+INSLT4 <- booleans[,33]
+difference <- booleans[,34]
+
+booleans_nokdnf <- data_17att_tx37
+
+age <- booleans_nokdnf[,17]
+CS1 <- booleans_nokdnf[,18]
+R1 <- booleans_nokdnf[,19]
+WEL1 <- booleans_nokdnf[,20]
+INSLT1 <- booleans_nokdnf[,21]
+CS2 <- booleans_nokdnf[,22]
+R2 <- booleans_nokdnf[,23]
+WEL2 <- booleans_nokdnf[,24]
+INSLT2 <- booleans_nokdnf[,25]
+CS3 <- booleans_nokdnf[,26]
+R3 <- booleans_nokdnf[,27]
+WEL3 <- booleans_nokdnf[,28]
+INSLT3 <- booleans_nokdnf[,29]
+CS4 <- booleans_nokdnf[,30]
+R4 <- booleans_nokdnf[,31]
+WEL4 <- booleans_nokdnf[,32]
+INSLT4 <- booleans_nokdnf[,33]
+difference <- booleans_nokdnf[,34]
+
+tree_1=M5P(difference ~ age + CS1 + R1 + WEL1 + INSLT1 + CS2 + R2 + WEL2 + INSLT2 + CS3 + R3 + WEL3 + INSLT3 + CS4 + R4 + WEL4 + INSLT4, data= booleans)
+tree_1
+
+tree_2=M5P(difference ~ age + CS1 + R1 + WEL1 + INSLT1 + CS2 + R2 + WEL2 + INSLT2 + CS3 + R3 + WEL3 + INSLT3 + CS4 + R4 + WEL4 + INSLT4, data= booleans_nokdnf)
+tree_2
+
+
+
+#library(rJava)      
+#ModelTree=as.matrix(scan(text=.jcall(tree_1$classifier, "S","toString") ,sep="\n", what="") )[-c(1:2, 6), ,drop=FALSE]
+#ModelTree
+
+
+
+#e <- evaluate_Weka_classifier(tree_1, cost = matrix(c(0,2,1,0), ncol = 2),
+#numFolds = 10, complexity = TRUE,
+#seed = 123, class = TRUE)
+#e
+#summary(e)
+#e$details
+
+
+write_to_dot(tree_1)
+
+```
+
