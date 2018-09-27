@@ -122,7 +122,7 @@ Sorted_reals <- subset(SortByTime, select = c(CS2, R2, WEL2, INSLT2, CS3, R3, WE
 attributes <- cbind(RSV_X, Sorted, Sorted_reals, WELfinal)                 # puts it in the attributes matrix, since it wasn't included earlier
 
 attributes$WEL1 <- log(attributes$WEL1)
-attributes$WEL3 <- log(attributes$WEL4)
+attributes$WEL4 <- log(attributes$WEL4)
 
 attributes$Num <- c(rep(c(1,2,3,4),11100))
 attributes <- subset(attributes, Num==1 | Num==4)
