@@ -105,7 +105,7 @@ for(i in 1:m){
   } else {
     RSV_X[i,"INSLT1_75"] <- 1
   }
-  if(Sorted[i,"WEL1"] <= .831){
+  if(Sorted[i,"WEL1"] <= 1.996555){
     RSV_X[i,"WEL_TreeSplit"] <- 0
   } else {
     RSV_X[i,"WEL_TreeSplit"] <- 1
