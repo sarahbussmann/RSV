@@ -127,7 +127,7 @@ attributes$WEL3 <- log(attributes$WEL3)
 attributes$Num <- c(rep(c(1,2,3,4),11100))
 attributes <- subset(attributes, Num==1 | Num==3)
 
-attributes2 <- subset(attributes, Num==3)$WEL
+attributes3 <- subset(attributes, Num==3)$WEL
 attributes1 <- subset(attributes, Num==1)$WEL
 Difference <- log(attributes3) - log(attributes1)
 
